@@ -11,7 +11,7 @@ public class CartItem {
 	
 	public CartItem(String[] book) {
 		this.itemBook = book;
-		this.bookId = book[0];
+		this.bookID = book[0];
 		this.quantity = 1;
 		updateTotalPrice();
 		
