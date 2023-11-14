@@ -5,6 +5,8 @@ public class Welcome {
 	static final int NUM_ITEM = 7;
 	static CartItem[] mCartItem = new CartItem[NUM_BOOK];
 	static int mCartCount = 0;
+	
+	static User mUser;
 
 	public static void main(String[] args) {
 		String[][]mBook= new String[NUM_BOOK][NUM_ITEM];
@@ -16,6 +18,8 @@ public class Welcome {
 		
 		System.out.print("연락처를 입력하세요: ");
 		int userMobile = input.nextInt();	//연락처를 int(정수)로 입력받음, 입력받는 코드, 아래 int n과 다름
+		
+		mUser = new User(userName, userMobile);
 		
 		String greeting = "welcome to Shopping Mall"; //인사말을 문자열 변수에 저장
 		String tagline = "Welcome to Book Market!"; // "
@@ -80,8 +84,9 @@ public class Welcome {
 	public static void menuGuestInfo(String name, int mobile){
 		System.out.println("\n현재 고객 정보: ");
 		//System.out.println("이름: "+name + " "+ "연락처: "+Mobile);
-		Person person = new Person(name, mobile);
-		System.out.println("이름 "+person.getName()+ "  연락처 "+person.getPhone());
+		//Person person = new Person(name, mobile);
+		//System.out.println("이름 "+person.getName()+ "  연락처 "+person.getPhone());
+		System.out.println("이름 "+mUser.getName()+"  연락처 "+ mUser.getPhone());
 	}
 	
 	public static void menuCartItemList() {
