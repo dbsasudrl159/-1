@@ -48,48 +48,51 @@ public class Welcome {
 			System.out.println("\t"+tagline); // "
 			
 			menuIntroduction();
+			try {
+				System.out.println("메뉴 번호를 선택해주세요 ");
+				int n = input.nextInt();
 			
-			System.out.print("\n메뉴 번호를 선택해주세요: "); 
-		
-			int n = input.nextInt();	//메뉴 번호 입력, 나중에 조건문과 반복문에 사용됨, 	
-			//System.out.println(n+"번을 선택했습니다.");	 //입력한 번호를 출력하는 코드
-			
-			if (n <1 || n>9) {
-				System.out.println("1부터 9까지의 숫자를 입력하세요. ");
+				if (n <1 || n>9) {
+					System.out.println("1부터 9까지의 숫자를 입력하세요. ");
+				}
+				else {
+					switch(n){
+						case 1:
+							menuGuestInfo(userName, userMobile);
+							break;
+						case 2:
+							menuCartItemList();
+							break;
+						case 3:
+							menuCartClear();
+							break;
+						case 4:
+							//menuCartAddItem(mBook);
+							menuCartAddItem(mBookList);
+							break;
+						case 5:
+							menuCartRemoveItemCount();
+							break;
+						case 6:
+							menuCartRemoveItem();
+							break;
+						case 7:
+							menuCartBill();
+							break;
+						case 8:
+							menuExit();
+							quit =true;
+							break;
+							
+						case 9:
+							menuAdminLogin();
+							break;
+					}			
+				}
 			}
-			else {
-				switch(n){
-					case 1:
-						menuGuestInfo(userName, userMobile);
-						break;
-					case 2:
-						menuCartItemList();
-						break;
-					case 3:
-						menuCartClear();
-						break;
-					case 4:
-						//menuCartAddItem(mBook);
-						menuCartAddItem(mBookList);
-						break;
-					case 5:
-						menuCartRemoveItemCount();
-						break;
-					case 6:
-						menuCartRemoveItem();
-						break;
-					case 7:
-						menuCartBill();
-						break;
-					case 8:
-						menuExit();
-						quit =true;
-						break;
-						
-					case 9:
-						menuAdminLogin();
-						break;
-				}			
+			catch(Exception e) {
+				System.out.println("올바르지 않은 메뉴 선택으로 종료합니다.");
+				quit = true;
 			}
 		}
 	}
