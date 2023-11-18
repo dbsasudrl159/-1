@@ -178,7 +178,7 @@ public class Welcome {
 				str = input.nextLine();
 				
 				if(str.toUpperCase().equals("Y")) {
-					System.out.println(booklist[numId].getBookId()+ "도서가 장바구니에 추가되었습니다.");
+					System.out.println(booklist[numId].getBookId()+ " 도서가 장바구니에 추가되었습니다.");
 					
 					if(!isCartInBook(booklist[numId].getBookId())) {
 						//mCartItem[mCartCount++] = new CartItem(book[numId]);
