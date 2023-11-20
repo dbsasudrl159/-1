@@ -5,6 +5,9 @@ import com.market.bookitem.Book;
 import com.market.cart.Cart;
 import com.market.member.Admin;
 import com.market.member.User;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import com.market.exception.CartException;
@@ -26,7 +29,9 @@ public class Welcome {
 
 	public static void main(String[] args) {
 		//String[][]mBook= new String[NUM_BOOK][NUM_ITEM];
-		Book[] mBookList = new Book[NUM_BOOK];
+		//Book[] mBookList = new Book[NUM_BOOK];
+		Book[] mBookList;
+		int mTotalBook = 0;
 		Scanner input = new Scanner(System.in);		//Scanner 클래스의 객체 생성
 		System.out.print("당신의 이름을 입력하세요: ");
 		String userName = input.next();		//이름을 String으로 입력 받음, 입력받는 코드
@@ -70,6 +75,8 @@ public class Welcome {
 							break;
 						case 4:
 							//menuCartAddItem(mBook);
+							mTotalBook = totalFileToBookList();
+							mBookList = new Book[mTotalBook];
 							menuCartAddItem(mBookList);
 							break;
 						case 5:
@@ -286,7 +293,8 @@ public class Welcome {
 	}
 	
 	public static void BookList(Book[] booklist) {
-		
+		setFileToBookList(booklist);
+		/*
 		booklist[0] = new Book("ISBN1234", "쉽게 배우는 JSP 웹 프로그래밍", 27000);	
 		booklist[0].setAuthor("송미영");
 		booklist[0].setDescription("단계별로 쇼핑몰을 구현하며 배우는 JSP 웹 프로그래밍");
@@ -303,7 +311,7 @@ public class Welcome {
 		booklist[2].setAuthor("고광일");
 		booklist[2].setDescription("컴퓨터 사고력을 키우는 블록 코딩");
 		booklist[2].setCategory("컴퓨터 입문");
-		booklist[2].setReleaseDate("2019/06/10");
+		booklist[2].setReleaseDate("2019/06/10");*/
 	}
 	
 	public static void menuAdminLogin() {
@@ -344,6 +352,61 @@ public class Welcome {
 		System.out.println("--------------------------------------------");
 		System.out.println();
 		
+	}
+	public static int totalFileToBookList() {
+		try {
+			FileReader fr = new FileReader("book.txt");
+			BufferedReader reader = new BufferedReader(fr);
+			
+			String str;
+			int num = 0;
+			while((str = reader.readLine())!= null) {
+				if(str.contains("ISBN"))
+					++num;
+			}
+			
+			reader.close();
+			fr.close();
+			return num;
+			
+		}
+		catch(Exception e) {
+			System.out.println(e);
+		}
+		return 0;
+	}
+	
+	public static void setFileToBookList(Book[] booklist) {
+		try {
+			FileReader fr = new FileReader("book.txt");
+			BufferedReader reader = new BufferedReader(fr);
+			
+			String str2;
+			String[] readBook = new String[7];
+			int count = 0;
+			
+			while((str2 =reader.readLine())!=null);{
+				if(str2.contains("ISBN")) {
+					readBook[0] = str2;
+					readBook[1] = reader.readLine();
+					readBook[2] = reader.readLine();
+					readBook[3] = reader.readLine();
+					readBook[4] = reader.readLine();
+					readBook[5] = reader.readLine();
+					readBook[6] = reader.readLine();
+				}
+				
+				booklist[count++] = new Book(readBook[0], 
+						readBook[1], Integer.parseInt(readBook[2]),readBook[3],readBook[4],readBook[5],readBook[6]);
+			}
+			
+			reader.close();
+			fr.close();
+		}
+		catch(Exception e) {
+			System.out.println(e);
+		}
+	
 	}
 										
 }
