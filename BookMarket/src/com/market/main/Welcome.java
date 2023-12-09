@@ -124,7 +124,7 @@ public class Welcome {
 	
 	public static void menuGuestInfo(String name, int mobile){
 		System.out.println("\n현재 고객 정보: ");
-		System.out.println("이름 "+mUser.getName()+"  연락처 "+ mUser.getPhone());
+		System.out.println("이름: "+mUser.getName()+"   |  연락처: "+ mUser.getPhone());
 	}
 	
 	public static void menuCartItemList() {
